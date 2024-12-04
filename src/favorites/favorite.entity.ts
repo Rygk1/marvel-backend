@@ -4,22 +4,22 @@ import { User } from '../users/user.entity';
 @Entity('favorites')
 export class Favorite {
   @PrimaryGeneratedColumn()
-  id: number; // Llave primaria autogenerada
+  id: number;
 
   @Column()
-  userId: string; // ID del usuario
+  userId: string;
 
   @Column()
-  comicId: string; // ID del cómic
+  comicId: string;
 
   @Column()
-  title: string; // Título del cómic
+  title: string;
 
   @Column({ nullable: true })
-  thumbnail: string; // URL de la imagen del cómic
+  thumbnail: string;
 
   @Column({ nullable: true })
-  description: string; // Descripción del cómic
+  description: string;
 
   @ManyToOne(() => User, (user) => user.favorites, { onDelete: 'CASCADE' })
   user: User;

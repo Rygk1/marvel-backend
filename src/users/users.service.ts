@@ -65,6 +65,7 @@ export class UsersService {
       throw new HttpException('Invalid credentials', 403);
     }
     const payload = {
+      userId: user.id,
       name: user.name,
       email: user.email,
     };

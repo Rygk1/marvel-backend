@@ -16,7 +16,7 @@ import { JwtAuthGuard } from 'src/users/jwt-auth.guard';
 export class FavoritesController {
   constructor(private readonly favoritesService: FavoritesService) {}
 
-  @Post(':userId')
+  @Post('/:userId')
   async addFavorite(
     @Param('userId') userId: number,
     @Body() favoriteData: Partial<Favorite>,
@@ -24,7 +24,7 @@ export class FavoritesController {
     return this.favoritesService.addFavorite(userId, favoriteData);
   }
 
-  @Get(':userId')
+  @Get('/:userId')
   async getFavoritesByUser(@Param('userId') userId: number) {
     return this.favoritesService.getFavoritesByUser(userId);
   }

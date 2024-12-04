@@ -14,19 +14,21 @@ export class FavoritesService {
   async addFavorite(
     userId: number,
     favoriteData: Partial<Favorite>,
-  ): Promise<Favorite> {
+  ): Promise<{ message: string; response: Favorite }> {
     const user = await this.userRepo.findOne({ where: { id: userId } });
 
     if (!user) {
       throw new Error('User not found');
     }
-
     const favorite = this.favoritesRepo.create({
       ...favoriteData,
       user,
     });
-
-    return this.favoritesRepo.save(favorite);
+    const response = await this.favoritesRepo.save(favorite);
+    return {
+      message: 'Agregado a Favorito de forma correcta',
+      response,
+    };
   }
 
   async getFavoritesByUser(userId: number): Promise<Favorite[]> {
