@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { MarvelModule } from './marvel/marvel.module';
 import { ConfigModule } from '@nestjs/config';
 import { FavoritesModule } from './favorites/favorites.module';
+import { URLS } from './consts/consts';
 
 @Module({
   imports: [
@@ -13,11 +14,11 @@ import { FavoritesModule } from './favorites/favorites.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Beforeiforget1729.',
-      database: 'marvel',
+      host: URLS.host,
+      port: URLS.port,
+      username: URLS.user,
+      password: URLS.password,
+      database: URLS.dbName,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
       synchronize: true,
