@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Favorite } from './favorite.entity';
 import { User } from 'src/users/user.entity';
 
@@ -34,13 +34,15 @@ export class FavoritesService {
   async getFavoritesByUser(userId: number): Promise<Favorite[]> {
     return this.favoritesRepo.find({
       where: { user: { id: userId } },
-      relations: ['user'],
     });
   }
 
-  async removeFavorite(favoriteId: number, userId: number): Promise<void> {
+  async removeFavorite(
+    favoriteId: number,
+    userId: number,
+  ): Promise<DeleteResult> {
     const favorite = await this.favoritesRepo.findOne({
-      where: { id: favoriteId, user: { id: userId } },
+      where: { comicId: favoriteId, user: { id: userId } },
       relations: ['user'],
     });
 
@@ -48,6 +50,11 @@ export class FavoritesService {
       throw new Error('Favorite not found or does not belong to the user');
     }
 
-    await this.favoritesRepo.remove(favorite);
+    const deleted = await this.favoritesRepo.delete({
+      id: favorite.id,
+      userId: favorite.userId,
+    });
+
+    return deleted;
   }
 }

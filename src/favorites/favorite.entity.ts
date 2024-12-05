@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
 import { User } from '../users/user.entity';
 
 @Entity('favorites')
@@ -10,7 +16,7 @@ export class Favorite {
   userId: string;
 
   @Column()
-  comicId: string;
+  comicId: number;
 
   @Column()
   title: string;
@@ -20,6 +26,12 @@ export class Favorite {
 
   @Column({ nullable: true })
   description: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @CreateDateColumn()
+  updatedAt: Date;
 
   @ManyToOne(() => User, (user) => user.favorites, { onDelete: 'CASCADE' })
   user: User;

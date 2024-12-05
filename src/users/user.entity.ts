@@ -27,6 +27,9 @@ export class User {
   @CreateDateColumn()
   createdAt: Date;
 
+  @CreateDateColumn()
+  updatedAt: Date;
+
   @OneToMany(() => Favorite, (favorite) => favorite.user, { cascade: true })
   favorites: Favorite[];
 }
