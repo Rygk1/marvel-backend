@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import * as crypto from 'crypto';
+import { URLS } from 'src/consts/consts';
 
 @Injectable()
 export class MarvelService {
-  private readonly baseUrl = 'https://gateway.marvel.com/v1/public';
+  private readonly baseUrl = URLS.marvelUrl;
 
   private generateHash(ts: string): string {
-    const MARVEL_PUBLIC_KEY = '95c2d4e6629b156c4c32489a89b03461';
-    const MARVEL_PRIVATE_KEY = '1fc1d2a6f39f7237a3c28273ecde85b8ae1d19d1';
+    const MARVEL_PUBLIC_KEY = URLS.marvelPrivateKey;
+    const MARVEL_PRIVATE_KEY = URLS.marvelPrivateKey;
 
     return crypto
       .createHash('md5')

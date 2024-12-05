@@ -7,4 +7,7 @@ export const URLS = {
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   dbName: process.env.DATABASE_NAME,
+  marvelPublicKey: process.env.MARVEL_PUBLIC_KEY,
+  marvelPrivateKey: process.env.MARVEL_PRIVATE_KEY,
+  marvelUrl: process.env.MARVEL_URL,
 };
